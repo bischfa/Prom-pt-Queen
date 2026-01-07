@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prom(pt)-Queen</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <div class="header-container">
+        <img src="KI_krone.png" alt="Logo" class="header-logo">
+        <h1>Prom(pt)-Queen</h1>
+        <span class="by-text">by</span>
+        <img src="fb.png" alt="Author Logo" class="author-logo">
+        
+        <div class="header-controls">
+             <div id="theme-toggle-switch" class="toggle-switch-container" title="Light/Dark-Modus">
+                <div class="toggle-switch"><span>💡</span><span>☀️</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-layout">
+
+        <aside class="sidebar">
+            <ul class="category-menu">
+                <li class="active" data-target="cat-rolle">1. Rolle & Expertise</li>
+                <li data-target="cat-kontext">2. Kontext & Branche</li>
+                <li data-target="cat-format">3. Ausgabeformat</li>
+                <li data-target="cat-beispiele">4. Beispiele & Belege</li>
+                <li data-target="cat-cot">5. Schritt-für-Schritt (CoT)</li>
+                <li data-target="cat-ton">6. Ton, Stil & Emotion</li>
+                <li data-target="cat-regeln">7. Regeln & Limits</li>
+                <li data-target="cat-zielgruppe">8. Zielgruppe & Sprache</li>
+                <li data-target="cat-kreativ">9. Kreativität</li>
+                <li data-target="cat-perspektive">10. Perspektive</li>
+                <li data-target="cat-zeit">11. Zeit & Priorität</li>
+                <li data-target="cat-umsetzung">12. Praktische Umsetzung</li>
+                <li data-target="cat-vergleich">13. Vergleich & Bewertung</li>
+                <li data-target="cat-lernziel">14. Lernziel & Checks</li>
+                <li data-target="cat-umfang">15. Umfang & Länge</li>
+                <li data-target="cat-interaktiv">16. Interaktivität</li>
+            </ul>
+        </aside>
+
+        <main class="content-area">
+
+            <div class="pane static-pane">
+                <div class="pane-header">
+                    <h2>Basis-Prompt</h2>
+                    <button id="reset-button" title="Alles leeren">🗑️ Zurücksetzen</button>
+                </div>
+                <textarea id="base-prompt" placeholder="Dein Grundbefehl hier rein... (z.B. 'Erstelle einen Trainingsplan')"></textarea>
+            </div>
+
+            <div class="pane dynamic-pane" id="enhancer-form">
+                
+                <div id="cat-rolle" class="category-content active">
+                    <div class="category-header">
+                        <button class="nav-arrow prev-cat" title="Zurück">&#8592;</button>
+                        <h3>1. Rolle & Expertise</h3>
+                        <button class="nav-arrow next-cat" title="Weiter">&#8594;</button>
+                    </div>
+                    <p class="cat-desc">Gib der KI eine Persona. Das aktiviert spezifisches Fachwissen.</p>
+                    <div class="option-group">
+                        <input type="checkbox" id="role-check" data-target="role-input">
+                        <label for="role-check">Expertenrolle zuweisen</label>
+                        <input type="text" id="role-input" placeholder="z.B. Senior Marketing Manager, Ernährungsberater">
+                    </div>
+                    <small class="info-text">Die KI wird aus der Sicht dieser Person antworten und deren Erfahrung nutzen.</small>
+                </div>
+
+                <div id="cat-kontext" class="category-content">
+                    <div class="category-header">
+                        <button class="nav-arrow prev-cat" title="Zurück">&#8592;</button>
+                        <h3>2. Kontext & Branche</h3>
+                        <button class="nav-arrow next-cat" title="Weiter">&#8594;</button>
+                    </div>
+                    <p class="cat-desc">Je mehr Hintergrundinfos die KI hat, desto passender die Antwort.</p>
+                    <div class="option-block">
+                        <div class="option-group">
+                            <input type="checkbox" id="context-check" data-target="context-input">
+                            <label for="context-check">Hintergrundsituation</label>
+                            <input type="text" id="context-input" placeholder="z.B. Wir sind ein kleines Startup mit wenig Budget...">
+                        </div>
+                        <small class="info-text">Beschreibe die Ausgangslage kurz, damit die KI nicht raten muss.</small>
+                    </div>
+                    <div class="option-block" style="margin-top: 15px;">
+                        <div class="option-group">
+                            <input type="checkbox" id="branche-check" data-target="branche-input">
+                            <label for="branche-check">Branche / Industrie</label>
+                            <input type="text" id="branche-input" placeholder="z.B. Automobil, E-Commerce, Handwerk">
+                        </div>
+                        <small class="info-text">Sorgt für passenden Fachjargon und relevante Branchen-Beispiele.</small>
+                    </div>
+                </div>
+
+                <div id="cat-format" class="category-content">
+                    <div class="category-header">
+                        <button class="nav-arrow prev-cat" title="Zurück">&#8592;</button>
+                        <h3>3. Ausgabeformat</h3>
+                        <button class="nav-arrow next-cat" title="Weiter">&#8594;</button>
+                    </div>
+                    <p class="cat-desc">Bestimme exakt, wie das Ergebnis aussehen soll.</p>
+                    <div class="checkbox-grid">
+                        <div class="option-block">
+                            <input type="checkbox" id="format-markdown"><label for="format-markdown">Markdown</label>
+                            <small class="info-text">Saubere Formatierung mit Überschriften, Fettschrift und Listen.</small>
+                        </div>
+                        <div class="option-block">
+                            <input type="checkbox" id="format-json"><label for="format-json">JSON Format</label>
+                            <small class="info-text">Strukturierte Daten für Programmierer (Maschinenlesbar).</small>
+                        </div>
+                        <div class="option-block">
+                            <input type="checkbox" id="format-table"><label for="format-table">Tabelle</label>
+                            <small class="info-text">Stellt Informationen übersichtlich in Spalten und Zeilen dar.</small>
+                        </div>
+                        <div class="option-block">
+                            <input type="checkbox" id="format-code"><label for="format-code">Reiner Code</label>
+                            <small class="info-text">Gibt nur den Quellcode aus, ohne lange Erklärungen drumherum.</small>
+                        </div>
+                    </div>
+                    <div class="option-group" style="margin-top: 15px;">
+                        <input type="checkbox" id="format-custom-check">
+                        <label for="format-custom-check">Eigenes Format:</label>
+                        <input type="text" id="format-custom-input" placeholder="z.B. CSV, HTML-Liste, Gedicht">
+                    </div>
+                </div>
+
+                <div id="cat-beispiele" class="category-content">
+                    <div class="category-header">
+                        <button class="nav-arrow prev-cat" title="Zurück">&#8592;</button>
+                        <h3>4. Beispiele & Belege</h3>
+                        <button class="nav-arrow next-cat" title="Weiter">&#8594;</button>
+                    </div>
+                    <p class="cat-desc">Zeige der KI, was du erwartest, oder fordere Beweise an.</p>
+                    <div class="option-block">
+                        <div class="option-group">
+                            <input type="checkbox" id="fewshot-check" data-target="fewshot-input">
+                            <label for="fewshot-check">Few-Shot Beispiele</label>
+                            <input type="text" id="fewshot-input" placeholder="z.B. Input: A, Output: B">
+                        </div>
+                        <small class="info-text">Der effektivste Weg, der KI ein komplexes Format beizubringen: Mach es ihr einmal vor.</small>
+                    </div>
+                    <div class="checkbox-grid" style="margin-top:15px;">
+                        <div class="option-block">
+                            <input type="checkbox" id="belege-beispiel"><label for="belege-beispiel">Praxisbeispiele</label>
+                            <small class="info-text">Fordert konkrete Fallstudien oder reale Anwendungsfälle.</small>
+                        </div>
+                        <div class="option-block">
+                            <input type="checkbox" id="belege-fakten"><label for="belege-fakten">Zahlen & Fakten</label>
+                            <small class="info-text">Verlangt nach datenbasierten Aussagen statt nur Meinungen.</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="cat-cot" class="category-content">
+                    <div class="category-header">
+                        <button class="nav-arrow prev-cat" title="Zurück">&#8592;</button>
+                        <h3>5. Schritt-für-Schritt Denken (CoT)</h3>
+                        <button class="nav-arrow next-cat" title="Weiter">&#8594;</button>
+                    </div>
+                    <p class="cat-desc">Der "Turbo-Knopf" für Logikaufgaben.</p>
+                    <div class="option-block">
+                        <div class="option-group">
+                            <input type="checkbox" id="cot-check">
+                            <label for="cot-check"><strong>Denkprozess offenlegen</strong></label>
+                        </div>
+                        <small class="info-text">Zwingt die KI, erst laut "nachzudenken", bevor sie antwortet. Reduziert Flüchtigkeitsfehler bei Mathe oder Logik massiv.</small>
+                    </div>
+                </div>
+
+                <div id="cat-ton" class="category-content">
+                    <div class="category-header">
+                        <button class="nav-arrow prev-cat" title="Zurück">&#8592;</button>
+                        <h3>6. Ton, Stil & Emotion</h3>
+                        <button class="nav-arrow next-cat" title="Weiter">&#8594;</button>
+                    </div>
+                    <p class="cat-desc">Wie soll die Antwort "klingen"?</p>
+                    <div class="checkbox-grid">
+                        <div class="option-block"><input type="checkbox" id="ton-pro"><label for="ton-pro">Professionell</label><small class="info-text">Sachlich, distanziert, Business-like.</small></div>
+                        <div class="option-block"><input type="checkbox" id="ton-locker"><label for="ton-locker">Locker</label><small class="info-text">Duz-Kultur, freundlich, zugänglich.</small></div>
+                        <div class="option-block"><input type="checkbox" id="ton-knapp"><label for="ton-knapp">Knapp</label><small class="info-text">Kein Geschwafel, nur Fakten.</small></div>
+                        <div class="option-block"><input type="checkbox" id="ton-detail"><label for="ton-detail">Detailliert</label><small class="info-text">Lange, umfassende Erklärungen.</small></div>
+                        <div class="option-block"><input type="checkbox" id="emo-empathie"><label for="emo-empathie">Empathisch</label><small class="info-text">Zeigt Verständnis für Gefühle.</small></div>
+                        <div class="option-block"><input type="checkbox" id="emo-motivation"><label for="emo-motivation">Motivierend</label><small class="info-text">Ermutigender "Coach"-Tonfall.</small></div>
+                    </div>
+                </div>
+
+                 <div id="cat-regeln" class="category-content">
+                    <div class="category-header">
+                        <button class="nav-arrow prev-cat" title="Zurück">&#8592;</button>
+                        <h3>7. Regeln & Einschränkungen</h3>
+                        <button class="nav-arrow next-cat" title="Weiter">&#8594;</button>
+                    </div>
+                    <p class="cat-desc">Setze harte Leitplanken für die KI.</p>
+                    <div class="option-block">
+                        <div class="option-group">
+                            <input type="checkbox" id="rules-check" data-target="rules-input">
+                            <label for="rules-check">Gebote</label>
+                            <input type="text" id="rules-input" placeholder="z.B. Nutze nur deutsche Quellen">
+                        </div>
+                        <small class="info-text">Was muss die KI unbedingt tun (Pflicht)?</small>
+                    </div>
+                    <div class="option-block" style="margin-top: 15px;">
+                        <div class="option-group">
+                            <input type="checkbox" id="rules-tabu-check" data-target="rules-tabu-input">
+                            <label for="rules-tabu-check">Verbote</label>
+                            <input type="text" id="rules-tabu-input" placeholder="z.B. Vermeide Fachjargon, keine Listen">
+                        </div>
+                        <small class="info-text">Sag der KI explizit, was sie NICHT tun darf (Tabu).</small>
+                    </div>
+                </div>
+
+                <div id="cat-zielgruppe" class="category-content">
+                    <div class="category-header">
+                        <button class="nav-arrow prev-cat" title="Zurück">&#8592;</button>
+                        <h3>8. Zielgruppe & Sprache</h3>
+                        <button class="nav-arrow next-cat" title="Weiter">&#8594;</button>
+                    </div>
+                    <p class="cat-desc">Für wen ist die Antwort gedacht?</p>
+                    <div class="option-block">
+                        <div class="option-group">
+                            <input type="checkbox" id="audience-check" data-target="audience-input">
+                            <label for="audience-check">Zielgruppe definieren:</label>
+                            <input type="text" id="audience-input" placeholder="z.B. 10-jährige Schüler, CEO, Experten">
+                        </div>
+                        <small class="info-text">Die KI passt Wortwahl und Komplexität automatisch an den Leser an.</small>
+                    </div>
+                    <hr style="margin: 15px 0; border:none; border-top:1px solid var(--border-color);">
+                    <div class="checkbox-grid">
+                         <div class="option-block">
+                             <input type="checkbox" id="lang-simple"><label for="lang-simple">Einfache Sprache (ELI5)</label>
+                             <small class="info-text">"Explain Like I'm 5". Maximale Verständlichkeit.</small>
+                         </div>
+                         <div class="option-block">
+                             <input type="checkbox" id="lang-metapher"><label for="lang-metapher">Metaphern nutzen</label>
+                             <small class="info-text">Erklärt komplizierte Konzepte durch bildhafte Vergleiche.</small>
+                         </div>
+                    </div>
+                </div>
+
+                <div id="cat-kreativ" class="category-content">
+                    <div class="category-header">
+                        <button class="nav-arrow prev-cat" title="Zurück">&#8592;</button>
+                        <h3>9. Kreativität</h3>
+                        <button class="nav-arrow next-cat" title="Weiter">&#8594;</button>
+                    </div>
+                    <p class="cat-desc">Wie "wild" darf die KI fantasieren?</p>
+                    <div class="checkbox-grid">
+                        <div class="option-block">
+                            <input type="checkbox" id="creative-on"><label for="creative-on">Sehr Kreativ (Out-of-the-Box)</label>
+                            <small class="info-text">Gut für Ideenfindung, riskant für Fakten.</small>
+                        </div>
+                        <div class="option-block">
+                            <input type="checkbox" id="creative-off"><label for="creative-off">Konservativ (Auf Nummer sicher)</label>
+                            <small class="info-text">Bleibt bei bekannten, etablierten Lösungen.</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="cat-perspektive" class="category-content">
+                    <div class="category-header">
+                        <button class="nav-arrow prev-cat" title="Zurück">&#8592;</button>
+                        <h3>10. Perspektive & Sichtweise</h3>
+                        <button class="nav-arrow next-cat" title="Weiter">&#8594;</button>
+                    </div>
+                    <p class="cat-desc">Hilft gegen einseitige Antworten.</p>
+                    <div class="checkbox-grid">
+                        <div class="option-block">
+                            <input type="checkbox" id="persp-multi"><label for="persp-multi">Multiple Perspektiven</label>
+                            <small class="info-text">Betrachtet das Thema aus mehreren Blickwinkeln (z.B. Kunde vs. Verkäufer).</small>
+                        </div>
+                        <div class="option-block">
+                            <input type="checkbox" id="persp-kritisch"><label for="persp-kritisch">Advocatus Diaboli</label>
+                            <small class="info-text">Die KI sucht aktiv nach Gegenargumenten, Risiken und Schwachstellen.</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="cat-zeit" class="category-content">
+                    <div class="category-header">
+                        <button class="nav-arrow prev-cat" title="Zurück">&#8592;</button>
+                        <h3>11. Zeitrahmen & Priorisierung</h3>
+                        <button class="nav-arrow next-cat" title="Weiter">&#8594;</button>
+                    </div>
+                    <p class="cat-desc">Bringt Struktur in lange Listen.</p>
+                    <div class="checkbox-grid">
+                        <div class="option-block">
+                            <input type="checkbox" id="prio-check"><label for="prio-check">Nach Wichtigkeit sortieren</label>
+                            <small class="info-text">Das Wichtigste kommt zuerst (Top-Down Prinzip).</small>
+                        </div>
+                        <div class="option-block">
+                            <input type="checkbox" id="zeit-check"><label for="zeit-check">Zeitlich einordnen</label>
+                            <small class="info-text">Unterteilt in kurz-, mittel- und langfristige Maßnahmen.</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="cat-umsetzung" class="category-content">
+                    <div class="category-header">
+                        <button class="nav-arrow prev-cat" title="Zurück">&#8592;</button>
+                        <h3>12. Praktische Umsetzung</h3>
+                        <button class="nav-arrow next-cat" title="Weiter">&#8594;</button>
+                    </div>
+                    <p class="cat-desc">Vom Wissen zum Handeln.</p>
+                    <div class="checkbox-grid">
+                        <div class="option-block"><input type="checkbox" id="praxis-brainstorm"><label for="praxis-brainstorm">Brainstorming</label><small class="info-text">Liefert eine reine Ideenliste (Quantität vor Qualität).</small></div>
+                        <div class="option-block"><input type="checkbox" id="praxis-schritte"><label for="praxis-schritte">Anleitung</label><small class="info-text">Konkrete Schritt-für-Schritt Handlungsanweisung.</small></div>
+                        <div class="option-block"><input type="checkbox" id="praxis-tools"><label for="praxis-tools">Tools</label><small class="info-text">Nennt Software, Webseiten oder Werkzeuge die helfen.</small></div>
+                        <div class="option-block"><input type="checkbox" id="praxis-fehler"><label for="praxis-fehler">Fehlerwarnung</label><small class="info-text">Weist auf typische Fallstricke hin, die man vermeiden sollte.</small></div>
+                    </div>
+                </div>
+
+                <div id="cat-vergleich" class="category-content">
+                    <div class="category-header">
+                        <button class="nav-arrow prev-cat" title="Zurück">&#8592;</button>
+                        <h3>13. Vergleich & Bewertung</h3>
+                        <button class="nav-arrow next-cat" title="Weiter">&#8594;</button>
+                    </div>
+                    <p class="cat-desc">Hilft bei Entscheidungen.</p>
+                    <div class="checkbox-grid">
+                         <div class="option-block">
+                             <input type="checkbox" id="compare-proscons"><label for="compare-proscons">Pro & Contra</label>
+                             <small class="info-text">Klassische Gegenüberstellung von Vor- und Nachteilen.</small>
+                         </div>
+                         <div class="option-block">
+                             <input type="checkbox" id="compare-alt"><label for="compare-alt">Alternativen</label>
+                             <small class="info-text">Schlägt andere Lösungswege vor, an die man vielleicht nicht gedacht hat.</small>
+                         </div>
+                    </div>
+                </div>
+
+                <div id="cat-lernziel" class="category-content">
+                    <div class="category-header">
+                        <button class="nav-arrow prev-cat" title="Zurück">&#8592;</button>
+                        <h3>14. Lernziel & Checks</h3>
+                        <button class="nav-arrow next-cat" title="Weiter">&#8594;</button>
+                    </div>
+                    <p class="cat-desc">Sichert ab, dass die Antwort verstanden wurde.</p>
+                    <div class="checkbox-grid">
+                        <div class="option-block">
+                            <input type="checkbox" id="lern-check"><label for="lern-check">Verständnisfragen</label>
+                            <small class="info-text">Die KI testet dich am Ende mit 1-2 Fragen zum Thema.</small>
+                        </div>
+                        <div class="option-block">
+                            <input type="checkbox" id="lern-summary"><label for="lern-summary">Zusammenfassung (TL;DR)</label>
+                            <small class="info-text">Fügt am Ende eine ultrakurze Zusammenfassung für Eilige hinzu.</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="cat-umfang" class="category-content">
+                    <div class="category-header">
+                        <button class="nav-arrow prev-cat" title="Zurück">&#8592;</button>
+                        <h3>15. Umfang & Länge</h3>
+                        <button class="nav-arrow next-cat" title="Weiter">&#8594;</button>
+                    </div>
+                    <p class="cat-desc">Steuert die Ausführlichkeit.</p>
+                     <div class="checkbox-grid">
+                        <div class="option-block"><input type="checkbox" id="len-kurz"><label for="len-kurz">Sehr Kurz</label><small class="info-text">Maximal Tweet-Länge.</small></div>
+                        <div class="option-block"><input type="checkbox" id="len-mittel"><label for="len-mittel">Mittel</label><small class="info-text">Standardlänge (2-3 Absätze).</small></div>
+                        <div class="option-block"><input type="checkbox" id="len-lang"><label for="len-lang">Lang</label><small class="info-text">Ausführlicher Essay oder Artikel.</small></div>
+                        <div class="option-block"><input type="checkbox" id="len-extrem"><label for="len-extrem">Extrem</label><small class="info-text">Umfassende Recherchedokumentation.</small></div>
+                    </div>
+                </div>
+
+                <div id="cat-interaktiv" class="category-content">
+                    <div class="category-header">
+                        <button class="nav-arrow prev-cat" title="Zurück">&#8592;</button>
+                        <h3>16. Interaktivität</h3>
+                        <button class="nav-arrow next-cat" title="Weiter">&#8594;</button>
+                    </div>
+                    <p class="cat-desc">Macht aus einem Monolog einen Dialog.</p>
+                    <div class="checkbox-grid">
+                        <div class="option-block">
+                            <input type="checkbox" id="inter-ask"><label for="inter-ask">Rückfragen</label>
+                            <small class="info-text">Die KI darf stoppen und nachfragen, bevor sie eine falsche Antwort gibt.</small>
+                        </div>
+                        <div class="option-block">
+                            <input type="checkbox" id="inter-next"><label for="inter-next">Nächste Schritte</label>
+                            <small class="info-text">Die KI schlägt vor, was man als nächstes fragen könnte.</small>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="pane static-pane preview-pane-container">
+                <div class="preview-header">
+                    <h2>Live-Vorschau</h2>
+                    <button id="copy-button">
+                        <span class="copy-text">📋 Kopieren</span>
+                        <span class="copy-feedback">✅ Kopiert!</span>
+                    </button>
+                </div>
+                <textarea id="final-prompt" readonly placeholder="Hier erscheint dein fertiger Mega-Prompt..."></textarea>
+            </div>
+
+        </main>
+    </div>
+
+</body>
+</html>
