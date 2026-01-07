@@ -1,0 +1,268 @@
+/* --- GLOBALE VARIABLEN --- */
+:root {
+    --bg-color: #fcf8f3;
+    --pane-bg: #ffffff;
+    --text-color: #333333;
+    --label-color: #5d4037;
+    --border-color: #e0d8d0;
+    --accent-color: #6a0572;
+    --accent-color-hover: #4e0354;
+    --header-bg: #efece7;
+    --input-bg: #ffffff;
+    --input-border: #dcd7d0;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    
+    --sidebar-bg: #f5f2ed;
+    --sidebar-active: #6a0572;
+    --sidebar-active-text: #ffffff;
+    --sidebar-hover: #e0d8d0;
+    --switch-bg: #c9c0b7;
+}
+
+body.dark-mode {
+    --bg-color: #1a1a2e;
+    --pane-bg: #272740;
+    --text-color: #e0e0e0;
+    --label-color: #b0c4de;
+    --border-color: #484860;
+    --accent-color: #c780e0;
+    --accent-color-hover: #b36ad0;
+    --header-bg: #32324a;
+    --input-bg: #3a3a55;
+    --input-border: #606080;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+
+    --sidebar-bg: #23233a;
+    --sidebar-active: #c780e0;
+    --sidebar-active-text: #1a1a2e;
+    --sidebar-hover: #32324a;
+    --switch-bg: #5a5a70;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.5;
+    height: 100vh; /* Wichtig für Full-Height Layout */
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- HEADER --- */
+.header-container {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: var(--pane-bg);
+    border-bottom: 1px solid var(--border-color);
+    flex-shrink: 0;
+}
+.header-logo { height: 32px; width: 32px; object-fit: contain; margin-right: 10px; }
+h1 { 
+    font-size: 1.5rem; 
+    color: var(--accent-color); 
+    margin-right: 10px; /* Geändert: Nicht mehr auto, sondern fester kleiner Abstand */
+    text-transform: uppercase; 
+    font-weight: 700; 
+    letter-spacing: 0.05em; 
+}
+.by-text {
+    font-size: 0.95rem;
+    color: var(--label-color);
+    margin-right: 10px;
+    font-style: italic;
+}
+.author-logo {
+    height: 32px; /* Angepasst: gleiche Höhe wie header-logo */
+    width: auto;   /* Breite automatisch anpassen, um Proportionen zu halten */
+    object-fit: contain;
+    margin-right: auto; /* WICHTIG: Das schiebt jetzt alles Folgende nach rechts */
+}
+
+/* --- MAIN LAYOUT --- */
+.main-layout {
+    display: flex;
+    flex-grow: 1;         
+    overflow: hidden;     
+    height: calc(100vh - 60px); 
+}
+
+/* --- SIDEBAR MENÜ --- */
+.sidebar {
+    width: 260px;
+    background-color: var(--sidebar-bg);
+    border-right: 1px solid var(--border-color);
+    overflow-y: auto; 
+    flex-shrink: 0;
+}
+.category-menu { list-style: none; padding: 10px; }
+.category-menu li {
+    padding: 10px 15px;
+    margin-bottom: 5px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--label-color);
+    transition: all 0.2s;
+}
+.category-menu li:hover { background-color: var(--sidebar-hover); }
+.category-menu li.active {
+    background-color: var(--sidebar-active);
+    color: var(--sidebar-active-text);
+}
+/* Indikator für aktive Inhalte */
+.category-menu li.has-selection { background-color: rgba(106, 5, 114, 0.05); font-weight: 600; }
+.category-menu li.has-selection::after { content: '✓'; float: right; color: var(--accent-color); font-weight: bold; }
+.category-menu li.active.has-selection::after { color: var(--sidebar-active-text); }
+
+/* --- CONTENT AREA --- */
+.content-area {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+    overflow-y: auto; 
+}
+
+/* --- PANES --- */
+.pane {
+    background-color: var(--pane-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+}
+.static-pane { flex-shrink: 0; } 
+.dynamic-pane {
+    flex-grow: 1; 
+    min-height: 300px; 
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- DYNAMISCHER INHALT & HEADER --- */
+.category-content { display: none; animation: fadeIn 0.3s ease; }
+.category-content.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+.category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+}
+.category-header h3 {
+    margin: 0;
+    border-bottom: none;
+    color: var(--accent-color);
+    text-align: center;
+    flex-grow: 1;
+}
+.cat-desc { font-style: italic; color: var(--label-color); margin-bottom: 20px; font-size: 0.95rem; }
+
+/* --- PANE HEADER --- */
+.pane-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 8px;
+}
+.pane-header h2 {
+    margin: 0;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+.preview-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+
+
+/* === VEREINHEITLICHTER BUTTON STIL FÜR ALLE BUTTONS === */
+#reset-button, 
+#copy-button,
+.nav-arrow {
+    background-color: var(--accent-color); /* Alle Lila */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    padding: 8px 14px;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px; /* Abstand für Icons */
+}
+
+#reset-button:hover, 
+#copy-button:hover,
+.nav-arrow:hover {
+    background-color: var(--accent-color-hover);
+    transform: translateY(-1px); /* Leichter Hover-Effekt nach oben */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+/* Spezielle Anpassung für Pfeile, damit sie nicht zu breit sind */
+.nav-arrow {
+    font-size: 1.4rem;
+    padding: 4px 12px;
+    line-height: 1;
+}
+/* ==================================================== */
+
+.copy-feedback { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #28a745; color: white; border-radius: 6px; align-items: center; justify-content: center; }
+#copy-button { position: relative; /* Wichtig für Feedback */ }
+#copy-button.copied .copy-feedback { display: flex; }
+
+/* --- FORMULARE & INPUTS --- */
+textarea {
+    width: 100%; padding: 12px;
+    border: 1px solid var(--input-border); border-radius: 8px;
+    background-color: var(--input-bg); color: var(--text-color);
+    font-family: monospace; resize: vertical;
+}
+#base-prompt { min-height: 80px; height: 100px; }
+#final-prompt { min-height: 150px; height: 200px; background-color: var(--header-bg); }
+.small-textarea { min-height: 60px; height: 80px; margin-top: 8px; }
+
+input[type="text"] {
+    flex-grow: 1; padding: 8px 12px;
+    border: 1px solid var(--input-border); border-radius: 6px;
+    background-color: var(--input-bg); color: var(--text-color);
+}
+.option-group { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+.option-group.full-width-input { flex-direction: column; align-items: flex-start; }
+.option-group.full-width-input input[type="text"], 
+.option-group.full-width-input textarea { width: 100%; margin-left: 0; }
+.label-group { display: flex; align-items: center; margin-bottom: 4px; }
+input[type="checkbox"] { accent-color: var(--accent-color); width: 16px; height: 16px; margin-right: 10px; cursor: pointer; }
+label { cursor: pointer; user-select: none; }
+.info-text { display: block; font-size: 0.85rem; color: var(--label-color); font-style: italic; margin-top: 2px; margin-left: 26px; }
+
+/* --- GRID FÜR CHECKBOXEN --- */
+.checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
+    gap: 15px;
+}
+
+/* --- SWITCHES --- */
+.toggle-switch-container { cursor: pointer; }
+.toggle-switch { position: relative; display: flex; align-items: center; justify-content: space-between; padding: 0 8px; width: 50px; height: 26px; border-radius: 13px; background-color: var(--switch-bg); transition: 0.3s; }
+.toggle-switch::before { content: ''; position: absolute; width: 20px; height: 20px; border-radius: 50%; background-color: #fff; top: 3px; left: 3px; transition: 0.3s; box-shadow: 0 1px 2px rgba(0,0,0,0.2); }
+.toggle-switch-container.active .toggle-switch { background-color: var(--accent-color); }
+.toggle-switch-container.active .toggle-switch::before { transform: translateX(24px); }
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+    .main-layout { flex-direction: column; height: auto; }
+    .sidebar { width: 100%; height: 150px; border-right: none; border-bottom: 1px solid var(--border-color); }
+    .content-area { height: auto; overflow: visible; }
+}
