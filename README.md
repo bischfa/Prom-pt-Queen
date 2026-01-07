@@ -6,4 +6,6 @@ Das Ergebnis ist ein zusammengesetzter „Mega-Prompt“, der live generiert, an
 
 Es gibt keine Serverlogik, keine Speicherung, keine KI-Anbindung – alles läuft lokal im Browser.
 
-<a href="Start.html" target="_blank">HTML-Seite öffnen</a>
+<a href="https://github.com/bischfa/Prom-t-Queen/Start.html" target="_blank">
+  Live-Demo öffnen
+</a>
