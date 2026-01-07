@@ -5,3 +5,5 @@ Der Nutzer gibt einen Basis-Prompt ein und erweitert ihn schrittweise über eine
 Das Ergebnis ist ein zusammengesetzter „Mega-Prompt“, der live generiert, angezeigt und kopiert werden kann.
 
 Es gibt keine Serverlogik, keine Speicherung, keine KI-Anbindung – alles läuft lokal im Browser.
+
+<a href="Start.html" target="_blank">HTML-Seite öffnen</a>
